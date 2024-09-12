@@ -4,7 +4,7 @@ import numpy as np
 # Initialize Pygame
 pygame.init()
 
-# Screen setup
+#Screen Display
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -12,11 +12,11 @@ pygame.display.set_caption("Bouncing Ball in Circle")
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 
-# Circle properties
+#CIRCLE
 circle_radius = 200
 circle_center = (screen_width // 2, screen_height // 2)
 
-# Ball properties
+# BALL
 ball_radius = 10
 ball_position = np.array([circle_center[0], circle_center[1] - circle_radius + ball_radius], dtype=float)
 initial_velocity_x = 2.0  # Initial x component
@@ -41,7 +41,7 @@ def handle_collisions(ball_position, ball_velocity, circle_center, circle_radius
         ball_position = np.array(circle_center) + normal * (circle_radius - ball_radius)
     return ball_position, ball_velocity
 
-# Main loop
+#MAIN
 running = True
 clock = pygame.time.Clock()
 
@@ -50,11 +50,11 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     
-    # Update ball position and velocity
+    # Update the Positions
     ball_position, ball_velocity = update_position(ball_position, ball_velocity, dt)
     ball_position, ball_velocity = handle_collisions(ball_position, ball_velocity, circle_center, circle_radius, ball_radius)
 
-    # Draw everything
+    # Draw to Screen
     screen.fill(WHITE)
     pygame.draw.circle(screen, BLUE, circle_center, circle_radius, 1)
     pygame.draw.circle(screen, BLUE, (int(ball_position[0]), int(ball_position[1])), ball_radius)
